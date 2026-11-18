@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { tintClasses, type AppDef } from './apps'
 
@@ -21,6 +21,7 @@ export function DesktopIcon({ app, variant, selected, onSelect, onOpen }: Deskto
     <button
       id={`icon-${app.id}`}
       type="button"
+      aria-label={app.kind === 'link' ? `${app.label} (opens in a new tab)` : app.label}
       aria-describedby={isMobile ? undefined : 'icon-hint'}
       onPointerDown={(event) => {
         pointerType.current = event.pointerType
@@ -50,14 +51,18 @@ export function DesktopIcon({ app, variant, selected, onSelect, onOpen }: Deskto
       </span>
       <span
         className={cn(
-          'line-clamp-2 max-w-full rounded-md py-0.5 text-center font-mono text-xs [overflow-wrap:anywhere]',
+          'line-clamp-2 max-w-full rounded-md py-0.5 text-center font-mono text-xs break-words',
           isMobile ? 'px-0' : 'px-1.5',
           selected && !isMobile ? 'bg-primary text-primary-foreground' : 'text-foreground',
         )}
       >
-        {app.label}
+        {app.label.split(/(?<=[_.])/).map((part, index) => (
+          <Fragment key={index}>
+            {index > 0 && <wbr />}
+            {part}
+          </Fragment>
+        ))}
       </span>
-      {app.kind === 'link' && <span className="sr-only">(opens in a new tab)</span>}
     </button>
   )
 }

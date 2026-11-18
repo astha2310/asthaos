@@ -7,9 +7,9 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
 
 export const metadata: Metadata = {
-  title: 'AsthaOS — Astha Patel, IT Support & Security Analyst',
+  title: 'AsthaOS — Astha Patel, Security Analyst · SOC · GRC',
   description:
-    'The portfolio of Astha Patel, an IT support and security analyst, presented as a secure, pastel operating system.',
+    'The portfolio of Astha Patel, a security analyst open to Security Analyst, SOC and GRC roles (and IT support), presented as a secure, pastel operating system.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-background`}>
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

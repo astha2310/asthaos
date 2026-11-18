@@ -1,6 +1,11 @@
 import { cn } from '@/lib/utils'
 
-const STATUS = ['Open to IT support and security roles', 'Studying for Security+', 'Open to relocation']
+const STATUS = [
+  'Open to Security Analyst, SOC and GRC roles',
+  'Also open to IT support roles',
+  'Studying for CompTIA Security+',
+  'Open to relocation',
+]
 
 export function StickyNote({ variant }: { variant: 'desktop' | 'widget' }) {
   return (

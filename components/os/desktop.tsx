@@ -6,7 +6,7 @@ import { APP_BY_ID, APPS, type AppDef } from './apps'
 import { DesktopIcon } from './desktop-icon'
 import { Dock } from './dock'
 import { LoginToast } from './login-toast'
-import { OsWindow, type WinState } from './os-window'
+import { OsWindow, WIN_MAX_H, WIN_MAX_W, type WinState } from './os-window'
 import { StickyNote } from './sticky-note'
 import { ThreatPill, TopBar } from './top-bar'
 
@@ -52,7 +52,9 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
       const width = rect?.width ?? 1200
       const height = rect?.height ?? 700
       const offset = (prev.length % 6) * 32
-      const baseX = width > 960 ? 240 : 24
+      const winW = Math.min(WIN_MAX_W, width - 32)
+      const winH = Math.min(WIN_MAX_H, height - 32)
+      const centeredX = (width - winW) / 2
       return [
         ...prev,
         {
@@ -60,8 +62,8 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
           z,
           minimized: false,
           maximized: false,
-          x: clamp(baseX + offset, 16, width - 576),
-          y: clamp(16 + offset, 16, height - 396),
+          x: clamp(centeredX - 60 + offset, 16, width - winW - 16),
+          y: clamp(16 + offset, 16, height - winH - 16),
         },
       ]
     })
@@ -137,7 +139,10 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
             if (event.target === event.currentTarget) setSelected(null)
           }}
         >
-          <ul className="grid h-fit grid-cols-2 gap-x-1 gap-y-2" aria-label="Desktop">
+          <ul
+            className="grid h-full min-h-0 auto-cols-max grid-flow-col grid-rows-[repeat(auto-fill,7rem)] content-start gap-x-1 gap-y-1"
+            aria-label="Desktop"
+          >
             {APPS.map((app) => (
               <li key={app.id}>
                 <DesktopIcon

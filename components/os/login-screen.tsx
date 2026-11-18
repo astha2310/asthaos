@@ -83,7 +83,7 @@ export function LoginScreen({ onUnlock }: { onUnlock: () => void }) {
               <Avatar />
               <div className="flex flex-col items-center gap-1 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight text-balance text-foreground">Astha Patel</h1>
-                <p className="text-sm text-muted-foreground">IT Support &amp; Security Analyst</p>
+                <p className="text-sm text-muted-foreground">Security Analyst · SOC · GRC</p>
               </div>
               <div className="flex w-full flex-col gap-3">
                 <ReadOnlyField id="login-username" label="Username" icon={User} value="recruiter" />

@@ -1,9 +1,17 @@
 'use client'
 
 import { ArrowLeft, LockKeyhole, Maximize2, Minimize2, Minus, X, type LucideIcon } from 'lucide-react'
-import { useEffect, useRef, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type ComponentType, type PointerEvent } from 'react'
 import { cn } from '@/lib/utils'
 import type { AppDef } from './apps'
+import { AboutApp } from './content/about-app'
+import { CertsApp } from './content/certs-app'
+import { ExperienceApp } from './content/experience-app'
+import { ProjectsApp } from './content/projects-app'
+import { SkillsApp } from './content/skills-app'
+
+export const WIN_MAX_W = 760
+export const WIN_MAX_H = 560
 
 export type WinState = {
   id: string
@@ -98,7 +106,7 @@ export function OsWindow({
             <span className="sr-only">Close {app.label}</span>
           </button>
         </header>
-        <div className="mx-2 mb-2 flex flex-1 flex-col overflow-hidden rounded-2xl border border-glass-border bg-window">
+        <div className="mx-2 mb-2 flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-glass-border bg-window">
           <WindowBody app={app} />
         </div>
       </section>
@@ -143,8 +151,8 @@ export function OsWindow({
               zIndex: win.z,
               left: win.x,
               top: win.y,
-              width: 'min(560px, calc(100% - 32px))',
-              height: 'min(380px, calc(100% - 32px))',
+              width: `min(${WIN_MAX_W}px, calc(100% - 32px))`,
+              height: `min(${WIN_MAX_H}px, calc(100% - 32px))`,
             }
       }
       className={cn(
@@ -228,9 +236,34 @@ function WindowDot({
   )
 }
 
+const CONTENT: Partial<Record<string, ComponentType>> = {
+  about: AboutApp,
+  experience: ExperienceApp,
+  projects: ProjectsApp,
+  skills: SkillsApp,
+  certs: CertsApp,
+}
+
 function WindowBody({ app }: { app: AppDef }) {
+  const Content = CONTENT[app.id]
+  const [decrypted, setDecrypted] = useState(false)
+
+  useEffect(() => {
+    if (!Content) return
+    const timer = window.setTimeout(() => setDecrypted(true), 500)
+    return () => window.clearTimeout(timer)
+  }, [Content])
+
+  if (Content && decrypted) {
+    return (
+      <div className="flex min-h-0 flex-1 flex-col animate-in fade-in duration-300">
+        <Content />
+      </div>
+    )
+  }
+
   return (
-    <div className="flex flex-1 flex-col gap-5 overflow-auto p-6">
+    <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-auto p-6">
       <h2 className="font-mono text-xl font-semibold text-foreground">{app.label}</h2>
       <div className="flex flex-col gap-3 rounded-xl border border-border bg-background/40 p-4">
         <p role="status" className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
