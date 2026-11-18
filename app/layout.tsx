@@ -9,7 +9,7 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jet
 export const metadata: Metadata = {
   title: 'AsthaOS — Astha Patel, Security Analyst · SOC · GRC',
   description:
-    'The portfolio of Astha Patel, a security analyst open to Security Analyst, SOC and GRC roles (and IT support), presented as a secure, pastel operating system.',
+    'The portfolio of Astha Patel, a security analyst open to Security Analyst, SOC and GRC roles (and IT support), presented as a secure operating system.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light dark',
-  themeColor: '#CFE0FF',
+  themeColor: '#080D24',
   width: 'device-width',
   initialScale: 1,
 }
