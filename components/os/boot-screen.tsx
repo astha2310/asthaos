@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const LINES: { label: string; status?: string; tone: string }[] = [
-  { label: 'AsthaOS v2026 booting...', tone: 'text-lavender' },
-  { label: 'Loading firewall...', status: 'OK', tone: 'text-sky' },
-  { label: 'Checking MFA module...', status: 'OK', tone: 'text-sky' },
-  { label: 'Encrypting secrets...', status: 'OK', tone: 'text-sky' },
-  { label: 'All systems secure.', tone: 'text-mint' },
+  { label: 'AsthaOS v2026 booting...', tone: 'text-plasma-soft' },
+  { label: 'Loading firewall...', status: 'OK', tone: 'text-cyber' },
+  { label: 'Checking MFA module...', status: 'OK', tone: 'text-cyber' },
+  { label: 'Encrypting secrets...', status: 'OK', tone: 'text-cyber' },
+  { label: 'All systems secure.', tone: 'text-flare-soft' },
 ]
 
 const FULL_LINES = LINES.map((line) => (line.status ? `${line.label} ${line.status}` : line.label))
@@ -49,7 +49,7 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
   let cursorPlaced = false
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-ink p-6 md:p-12">
+    <div className="wallpaper fixed inset-0 flex flex-col p-6 md:p-12">
       <p className="sr-only" role="status">
         AsthaOS is booting. Press Escape or use the Skip button to continue to sign in.
       </p>
@@ -57,7 +57,7 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
         type="button"
         autoFocus
         onClick={onDone}
-        className="ml-auto flex items-center gap-1 rounded-full border border-sky/30 px-3 py-1.5 font-mono text-xs text-sky transition-colors hover:bg-sky/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+        className="ml-auto flex items-center gap-1 rounded-full border border-cyber/40 px-3 py-1.5 font-mono text-xs text-cyber transition-colors hover:bg-cyber/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyber"
       >
         Skip
         <ChevronsRight className="size-3.5" aria-hidden="true" />
@@ -77,14 +77,14 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
 
           return (
             <p key={line.label} className={cn('leading-relaxed', line.tone)}>
-              <span className="mr-2 text-slate">{'>'}</span>
+              <span className="mr-2 text-muted-foreground">{'>'}</span>
               {labelPart}
-              {statusPart && <span className="font-semibold text-mint">{statusPart}</span>}
-              {isTyping && <span className="caret ml-0.5 inline-block h-4 w-2 translate-y-0.5 bg-blush" />}
+              {statusPart && <span className="font-semibold text-cyber">{statusPart}</span>}
+              {isTyping && <span className="caret ml-0.5 inline-block h-4 w-2 translate-y-0.5 bg-flare" />}
             </p>
           )
         })}
-        {!cursorPlaced && <span className="caret ml-5 inline-block h-4 w-2 bg-blush" />}
+        {!cursorPlaced && <span className="caret ml-5 inline-block h-4 w-2 bg-flare" />}
       </div>
     </div>
   )

@@ -5,20 +5,21 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { APP_BY_ID, APPS, type AppDef } from './apps'
 import { DesktopIcon } from './desktop-icon'
 import { Dock } from './dock'
-import { LoginToast } from './login-toast'
+import { OsToast } from './login-toast'
+import { OsContext, type OsNotice } from './os-context'
 import { OsWindow, WIN_MAX_H, WIN_MAX_W, type WinState } from './os-window'
 import { StickyNote } from './sticky-note'
 import { ThreatPill, TopBar } from './top-bar'
 
 type DesktopProps = {
-  stealth: boolean
-  onToggleStealth: () => void
+  matrix: boolean
+  onToggleMatrix: () => void
   onLock: () => void
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), Math.max(min, max))
 
-export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
+export function Desktop({ matrix, onToggleMatrix, onLock }: DesktopProps) {
   const isMobile = useMediaQuery('(max-width: 767px)')
   const [wins, setWins] = useState<WinState[]>([])
   const [selected, setSelected] = useState<string | null>(null)
@@ -92,6 +93,26 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
     setWins((prev) => prev.map((win) => (win.id === id ? { ...win, x, y } : win)))
   }, [])
 
+  const noticeId = useRef(0)
+  const [notice, setNotice] = useState<(OsNotice & { id: number }) | null>({
+    id: 0,
+    title: 'New login detected: Recruiter.',
+    body: 'Welcome to AsthaOS.',
+  })
+  const clearNotice = useCallback(() => setNotice(null), [])
+
+  const osApi = useMemo(
+    () => ({
+      openApp: (id: string) => {
+        const app = APP_BY_ID[id]
+        if (app) openApp(app)
+      },
+      closeApp: closeWindow,
+      notify: (next: OsNotice) => setNotice({ ...next, id: ++noticeId.current }),
+    }),
+    [openApp, closeWindow],
+  )
+
   const windows = wins.map((win) => (
     <OsWindow
       key={win.id}
@@ -109,6 +130,7 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
   ))
 
   return (
+    <OsContext.Provider value={osApi}>
     <div className="wallpaper fixed inset-0 flex flex-col animate-in fade-in duration-700">
       <h1 ref={headingRef} tabIndex={-1} className="sr-only">
         AsthaOS desktop: the portfolio of Astha Patel
@@ -117,7 +139,7 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
         Press Enter to open. With a mouse, double-click.
       </p>
 
-      <TopBar stealth={stealth} onToggleStealth={onToggleStealth} onLock={onLock} />
+      <TopBar matrix={matrix} onToggleMatrix={onToggleMatrix} onLock={onLock} />
 
       {isMobile ? (
         <main className="flex flex-1 flex-col gap-5 overflow-y-auto px-4 py-4">
@@ -166,7 +188,8 @@ export function Desktop({ stealth, onToggleStealth, onLock }: DesktopProps) {
 
       {isMobile && <div className="pointer-events-none fixed inset-0 isolate z-50">{windows}</div>}
 
-      <LoginToast />
+      {notice && <OsToast key={notice.id} title={notice.title} body={notice.body} onGone={clearNotice} />}
     </div>
+    </OsContext.Provider>
   )
 }

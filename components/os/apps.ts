@@ -12,7 +12,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 
-export type AppTint = 'sky' | 'lavender' | 'blush' | 'mint' | 'navy'
+export type AppTint = 'cyber' | 'plasma' | 'flare' | 'terminal'
 
 export type AppDef = {
   id: string
@@ -24,26 +24,25 @@ export type AppDef = {
 }
 
 export const tintClasses: Record<AppTint, string> = {
-  sky: 'bg-sky text-navy',
-  lavender: 'bg-lavender text-navy',
-  blush: 'bg-blush text-navy',
-  mint: 'bg-mint text-navy',
-  navy: 'bg-navy text-mint ring-1 ring-sky/30',
+  cyber: 'bg-cyber/15 text-cyber ring-1 ring-cyber/30',
+  plasma: 'bg-plasma/20 text-plasma-soft ring-1 ring-plasma/40',
+  flare: 'bg-flare/15 text-flare-soft ring-1 ring-flare/35',
+  terminal: 'bg-terminal text-cyber ring-1 ring-cyber/40',
 }
 
 export const RESUME_URL = '/resume.pdf'
 
 export const APPS: AppDef[] = [
-  { id: 'about', label: 'about_me.txt', icon: FileText, tint: 'sky', kind: 'window' },
-  { id: 'experience', label: 'experience.log', icon: ScrollText, tint: 'lavender', kind: 'window' },
-  { id: 'projects', label: 'projects/', icon: FolderOpen, tint: 'sky', kind: 'window' },
-  { id: 'skills', label: 'skills.exe', icon: Cpu, tint: 'mint', kind: 'window' },
-  { id: 'certs', label: 'certs.key', icon: KeyRound, tint: 'blush', kind: 'window' },
-  { id: 'resume', label: 'resume.pdf', icon: FileDown, tint: 'lavender', kind: 'link', href: RESUME_URL },
-  { id: 'terminal', label: 'terminal', icon: SquareTerminal, tint: 'navy', kind: 'window' },
-  { id: 'phish', label: 'spot_the_phish.app', icon: Fish, tint: 'sky', kind: 'window' },
-  { id: 'danger', label: 'do_not_open.exe', icon: TriangleAlert, tint: 'blush', kind: 'window' },
-  { id: 'bin', label: 'Recycle Bin', icon: Trash2, tint: 'lavender', kind: 'window' },
+  { id: 'about', label: 'about_me.txt', icon: FileText, tint: 'cyber', kind: 'window' },
+  { id: 'experience', label: 'experience.log', icon: ScrollText, tint: 'plasma', kind: 'window' },
+  { id: 'projects', label: 'projects/', icon: FolderOpen, tint: 'cyber', kind: 'window' },
+  { id: 'skills', label: 'skills.exe', icon: Cpu, tint: 'cyber', kind: 'window' },
+  { id: 'certs', label: 'certs.key', icon: KeyRound, tint: 'flare', kind: 'window' },
+  { id: 'resume', label: 'resume.pdf', icon: FileDown, tint: 'plasma', kind: 'link', href: RESUME_URL },
+  { id: 'terminal', label: 'terminal', icon: SquareTerminal, tint: 'terminal', kind: 'window' },
+  { id: 'phish', label: 'spot_the_phish.app', icon: Fish, tint: 'cyber', kind: 'window' },
+  { id: 'danger', label: 'do_not_open.exe', icon: TriangleAlert, tint: 'flare', kind: 'window' },
+  { id: 'bin', label: 'Recycle Bin', icon: Trash2, tint: 'plasma', kind: 'window' },
 ]
 
 export const APP_BY_ID: Record<string, AppDef> = Object.fromEntries(APPS.map((app) => [app.id, app]))

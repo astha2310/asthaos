@@ -21,23 +21,23 @@ export function CertsApp() {
               <span
                 aria-hidden="true"
                 className={cn(
-                  'absolute -top-10 -right-10 size-28 rounded-full opacity-60',
-                  verified ? 'bg-mint' : 'bg-lavender',
+                  'absolute -top-10 -right-10 size-28 rounded-full opacity-25 blur-2xl',
+                  verified ? 'bg-cyber' : 'bg-plasma',
                 )}
               />
               <div className="relative flex items-start justify-between gap-3">
                 <span
                   className={cn(
-                    'flex size-11 items-center justify-center rounded-xl text-navy shadow-soft',
-                    verified ? 'bg-mint' : 'bg-lavender',
+                    'flex size-11 items-center justify-center rounded-xl shadow-soft ring-1',
+                    verified ? 'bg-cyber/15 text-cyber ring-cyber/30' : 'bg-plasma/20 text-plasma-soft ring-plasma/40',
                   )}
                 >
                   <KeyRound className="size-5" aria-hidden="true" />
                 </span>
                 <span
                   className={cn(
-                    'flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-xs font-semibold text-navy ring-1 ring-navy/10',
-                    verified ? 'bg-mint' : 'bg-lavender',
+                    'flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-xs font-semibold ring-1',
+                    verified ? 'bg-cyber/15 text-cyber ring-cyber/30' : 'bg-plasma/20 text-plasma-soft ring-plasma/40',
                   )}
                 >
                   <StatusIcon className="size-3.5" aria-hidden="true" />

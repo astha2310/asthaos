@@ -1,7 +1,7 @@
 import { SKILL_MODULES } from './data'
 import { TagChip } from './tag-chip'
 
-const tints = ['sky', 'lavender', 'blush', 'mint'] as const
+const tints = ['cyber', 'plasma', 'flare', 'blue'] as const
 
 export function SkillsApp() {
   const total = SKILL_MODULES.reduce((sum, mod) => sum + mod.skills.length, 0)
@@ -21,8 +21,8 @@ export function SkillsApp() {
               <h3 className="font-sans text-base font-semibold text-foreground">{mod.name}</h3>
               <span className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
                 <span className="relative flex size-2.5" aria-hidden="true">
-                  <span className="absolute inset-0 animate-ping rounded-full bg-mint opacity-70 motion-reduce:hidden" />
-                  <span className="relative size-2.5 rounded-full bg-mint ring-1 ring-navy/20" />
+                  <span className="absolute inset-0 animate-ping rounded-full bg-cyber opacity-60 motion-reduce:hidden" />
+                  <span className="relative size-2.5 rounded-full bg-cyber" />
                 </span>
                 {mod.file} · installed
               </span>

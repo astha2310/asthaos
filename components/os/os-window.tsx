@@ -5,10 +5,14 @@ import { useEffect, useRef, useState, type ComponentType, type PointerEvent } fr
 import { cn } from '@/lib/utils'
 import type { AppDef } from './apps'
 import { AboutApp } from './content/about-app'
+import { BinApp } from './content/bin-app'
 import { CertsApp } from './content/certs-app'
+import { DangerApp } from './content/danger-app'
 import { ExperienceApp } from './content/experience-app'
+import { PhishApp } from './content/phish-app'
 import { ProjectsApp } from './content/projects-app'
 import { SkillsApp } from './content/skills-app'
+import { TerminalApp } from './content/terminal-app'
 
 export const WIN_MAX_W = 760
 export const WIN_MAX_H = 560
@@ -175,16 +179,16 @@ export function OsWindow({
         )}
       >
         <div className="group/dots flex items-center gap-1">
-          <WindowDot label={`Close ${app.label}`} color="bg-blush" icon={X} onClick={() => onClose(app.id)} />
+          <WindowDot label={`Close ${app.label}`} color="bg-flare" icon={X} onClick={() => onClose(app.id)} />
           <WindowDot
             label={`Minimize ${app.label}`}
-            color="bg-lavender"
+            color="bg-plasma"
             icon={Minus}
             onClick={() => onMinimize(app.id)}
           />
           <WindowDot
             label={win.maximized ? `Restore ${app.label} size` : `Maximize ${app.label}`}
-            color="bg-mint"
+            color="bg-cyber"
             icon={win.maximized ? Minimize2 : Maximize2}
             onClick={() => onToggleMax(app.id)}
           />
@@ -225,9 +229,9 @@ function WindowDot({
       onClick={onClick}
       className="flex size-5 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <span className={cn('flex size-3.5 items-center justify-center rounded-full ring-1 ring-navy/20', color)}>
+      <span className={cn('flex size-3.5 items-center justify-center rounded-full ring-1 ring-cyber/25', color)}>
         <Icon
-          className="size-2.5 text-navy opacity-0 transition-opacity group-focus-within/dots:opacity-100 group-hover/dots:opacity-100"
+          className="size-2.5 text-midnight opacity-0 transition-opacity group-focus-within/dots:opacity-100 group-hover/dots:opacity-100"
           strokeWidth={3}
           aria-hidden="true"
         />
@@ -242,6 +246,10 @@ const CONTENT: Partial<Record<string, ComponentType>> = {
   projects: ProjectsApp,
   skills: SkillsApp,
   certs: CertsApp,
+  terminal: TerminalApp,
+  phish: PhishApp,
+  danger: DangerApp,
+  bin: BinApp,
 }
 
 function WindowBody({ app }: { app: AppDef }) {
@@ -273,7 +281,7 @@ function WindowBody({ app }: { app: AppDef }) {
         <div
           role="progressbar"
           aria-label={`Decrypting ${app.label}`}
-          className="relative h-2 overflow-hidden rounded-full bg-lavender/60"
+          className="relative h-2 overflow-hidden rounded-full bg-plasma/20"
         >
           <div className="shimmer-bar absolute inset-y-0 left-0 w-2/5 rounded-full" />
         </div>

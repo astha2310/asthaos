@@ -7,7 +7,7 @@ export function AboutApp() {
       <div className="flex min-h-0 flex-1 overflow-auto bg-background/50 font-mono text-sm leading-7">
         <ol className="w-full py-3" aria-label="File contents">
           {ABOUT_LINES.map((line, index) => (
-            <li key={index} className="flex gap-4 pr-5 hover:bg-sky/25">
+            <li key={index} className="flex gap-4 pr-5 hover:bg-cyber/10">
               <span
                 aria-hidden="true"
                 className="w-10 shrink-0 border-r border-border pr-3 text-right text-muted-foreground/70 select-none"

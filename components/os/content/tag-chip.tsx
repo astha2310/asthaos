@@ -2,14 +2,14 @@ import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 const tintMap = {
-  sky: 'bg-sky',
-  lavender: 'bg-lavender',
-  blush: 'bg-blush',
-  mint: 'bg-mint',
+  cyber: 'bg-cyber/12 text-cyber ring-cyber/30',
+  plasma: 'bg-plasma/18 text-plasma-soft ring-plasma/40',
+  flare: 'bg-flare/15 text-flare-soft ring-flare/35',
+  blue: 'bg-signal/20 text-sky-200 ring-signal/50',
 } as const
 
 export function TagChip({
-  tint = 'lavender',
+  tint = 'plasma',
   mono = true,
   children,
 }: {
@@ -20,7 +20,7 @@ export function TagChip({
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-1 text-xs text-navy ring-1 ring-navy/10',
+        'inline-flex items-center rounded-full px-2.5 py-1 text-xs ring-1',
         mono ? 'font-mono' : 'font-sans font-medium',
         tintMap[tint],
       )}

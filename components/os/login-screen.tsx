@@ -107,13 +107,13 @@ export function LoginScreen({ onUnlock }: { onUnlock: () => void }) {
             <div className="flex flex-col items-center gap-5 p-8 text-center">
               {granted ? (
                 <div className="flex flex-col items-center gap-4 animate-in fade-in zoom-in-90 duration-500">
-                  <span className="flex size-20 items-center justify-center rounded-full bg-mint text-navy shadow-soft">
+                  <span className="flex size-20 items-center justify-center rounded-full bg-cyber/15 text-cyber shadow-soft">
                     <ShieldCheck className="size-10" aria-hidden="true" />
                   </span>
                   <p
                     ref={grantedRef}
                     tabIndex={-1}
-                    className="font-mono text-xl font-semibold tracking-[0.2em] text-foreground outline-none"
+                    className="text-brand-gradient font-mono text-2xl font-bold tracking-[0.2em] outline-none"
                   >
                     ACCESS GRANTED
                   </p>
@@ -121,7 +121,7 @@ export function LoginScreen({ onUnlock }: { onUnlock: () => void }) {
                 </div>
               ) : (
                 <>
-                  <span className="flex size-14 items-center justify-center rounded-2xl bg-lavender text-navy">
+                  <span className="flex size-14 items-center justify-center rounded-2xl bg-plasma/20 text-plasma-soft">
                     <Smartphone className="size-6" aria-hidden="true" />
                   </span>
                   <div className="flex flex-col gap-1">
@@ -144,7 +144,7 @@ export function LoginScreen({ onUnlock }: { onUnlock: () => void }) {
                         className={cn(
                           'flex h-12 w-10 items-center justify-center rounded-xl border font-mono text-xl font-semibold transition-colors',
                           index < filled
-                            ? 'border-transparent bg-sky text-navy animate-in zoom-in-75 duration-200'
+                            ? 'border-cyber/60 bg-cyber/15 text-cyber animate-in zoom-in-75 duration-200'
                             : index === filled
                               ? 'border-foreground/40 bg-card'
                               : 'border-border bg-card/50',
@@ -193,10 +193,10 @@ export function LoginScreen({ onUnlock }: { onUnlock: () => void }) {
 function Avatar() {
   return (
     <div className="relative">
-      <div className="flex size-24 items-center justify-center rounded-full bg-sky text-3xl font-semibold tracking-tight text-navy shadow-soft ring-4 ring-glass-border">
+      <div className="flex size-24 items-center justify-center rounded-full bg-cyber/15 text-3xl font-semibold tracking-tight text-cyber shadow-soft ring-2 ring-cyber/50">
         AP
       </div>
-      <span className="absolute right-0 bottom-0 flex size-8 items-center justify-center rounded-full bg-blush text-navy ring-4 ring-glass-border">
+      <span className="absolute right-0 bottom-0 flex size-8 items-center justify-center rounded-full bg-flare text-white ring-4 ring-panel">
         <Lock className="size-3.5" aria-hidden="true" />
         <span className="sr-only">Account protected</span>
       </span>

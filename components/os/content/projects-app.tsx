@@ -121,12 +121,12 @@ export function ProjectsApp() {
                     }}
                     className={cn(
                       'flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left font-mono text-xs whitespace-nowrap focus-visible:outline-2 focus-visible:outline-ring',
-                      current ? 'bg-sky text-navy' : 'text-foreground hover:bg-card/70',
+                      current ? 'bg-cyber/15 text-cyber' : 'text-foreground hover:bg-card/70',
                     )}
                   >
                     <Icon className="size-4 shrink-0" aria-hidden="true" />
                     <span className="flex-1 truncate">{item.label}</span>
-                    <span className={cn('text-[11px]', current ? 'text-navy/70' : 'text-muted-foreground')}>
+                    <span className={cn('text-[11px]', current ? 'text-cyber/80' : 'text-muted-foreground')}>
                       {item.count}
                     </span>
                   </button>
@@ -189,8 +189,8 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
       <span className="flex items-start justify-between gap-3">
         <span
           className={cn(
-            'flex size-9 shrink-0 items-center justify-center rounded-lg text-navy',
-            project.pinned ? 'bg-blush' : 'bg-sky',
+            'flex size-9 shrink-0 items-center justify-center rounded-lg ring-1',
+            project.pinned ? 'bg-flare/15 text-flare-soft ring-flare/35' : 'bg-cyber/15 text-cyber ring-cyber/30',
           )}
         >
           <FolderGit2 className="size-4" aria-hidden="true" />
@@ -255,7 +255,7 @@ function ProjectDetail({
             {project.stats.map((stat) => (
               <li
                 key={stat}
-                className="rounded-lg bg-mint px-3 py-1.5 font-mono text-xs font-semibold text-navy ring-1 ring-navy/10"
+                className="rounded-lg bg-cyber/15 px-3 py-1.5 font-mono text-xs font-semibold text-cyber ring-1 ring-cyber/30"
               >
                 {stat}
               </li>
@@ -272,7 +272,7 @@ function ProjectDetail({
           <ul className="flex flex-wrap gap-2">
             {project.tools.map((tool) => (
               <li key={tool}>
-                <TagChip tint="lavender">{tool}</TagChip>
+                <TagChip tint="plasma">{tool}</TagChip>
               </li>
             ))}
           </ul>
@@ -290,7 +290,7 @@ function ProjectDetail({
               rel="noopener noreferrer"
               className={cn(
                 'inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow-soft transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none',
-                index === 0 ? 'bg-navy text-sky dark:bg-sky dark:text-navy' : 'bg-blush text-navy',
+                index === 0 ? 'bg-primary text-primary-foreground' : 'bg-signal text-[var(--signal-foreground)]',
               )}
             >
               <Icon className="size-4" aria-hidden="true" />

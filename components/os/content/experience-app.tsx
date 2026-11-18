@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils'
 import { JOBS, type LogLevel } from './data'
 
 const levelClasses: Record<LogLevel, string> = {
-  INFO: 'bg-sky text-navy',
-  'ALERT-HANDLED': 'bg-mint text-navy',
+  INFO: 'bg-cyber/15 text-cyber',
+  'ALERT-HANDLED': 'bg-cyber/15 text-cyber',
 }
 
 export function ExperienceApp() {
@@ -49,7 +49,7 @@ export function ExperienceApp() {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => toggle(job.id)}
-                  className="flex w-full items-start gap-2 rounded-xl p-3 text-left hover:bg-sky/20 focus-visible:outline-2 focus-visible:outline-ring"
+                  className="flex w-full items-start gap-2 rounded-xl p-3 text-left hover:bg-cyber/10 focus-visible:outline-2 focus-visible:outline-ring"
                 >
                   <ChevronRight
                     className={cn(

@@ -1,23 +1,23 @@
 'use client'
 
-import { Lock, LockKeyhole, Moon, Shield, ShieldCheck, Sun } from 'lucide-react'
+import { Binary, Lock, LockKeyhole, Shield, ShieldCheck } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 type TopBarProps = {
-  stealth: boolean
-  onToggleStealth: () => void
+  matrix: boolean
+  onToggleMatrix: () => void
   onLock: () => void
 }
 
-export function TopBar({ stealth, onToggleStealth, onLock }: TopBarProps) {
+export function TopBar({ matrix, onToggleMatrix, onLock }: TopBarProps) {
   return (
     <header className="glass relative z-30 mx-2 mt-2 grid h-12 grid-cols-[1fr_auto] items-center gap-3 rounded-2xl px-3 shadow-soft md:mx-3 md:grid-cols-[1fr_auto_1fr] md:px-4">
-      <div className="flex items-center gap-2 justify-self-start font-semibold tracking-tight text-foreground">
-        <span className="flex size-7 items-center justify-center rounded-lg bg-sky text-navy">
+      <div className="flex items-center gap-2 justify-self-start font-semibold tracking-tight">
+        <span className="bg-brand-gradient flex size-7 items-center justify-center rounded-lg text-midnight">
           <Shield className="size-4" aria-hidden="true" />
         </span>
-        AsthaOS
+        <span className="text-brand-gradient">AsthaOS</span>
       </div>
 
       <ThreatPill className="hidden md:flex" />
@@ -25,7 +25,7 @@ export function TopBar({ stealth, onToggleStealth, onLock }: TopBarProps) {
       <div className="flex items-center gap-1.5 justify-self-end md:gap-2">
         <Clock />
         <span
-          className="flex size-8 items-center justify-center rounded-full bg-mint text-navy"
+          className="flex size-8 items-center justify-center rounded-full bg-cyber/15 text-cyber ring-1 ring-cyber/30"
           title="Secure session"
         >
           <LockKeyhole className="size-4" aria-hidden="true" />
@@ -34,27 +34,23 @@ export function TopBar({ stealth, onToggleStealth, onLock }: TopBarProps) {
         <button
           type="button"
           role="switch"
-          aria-checked={stealth}
-          onClick={onToggleStealth}
-          className="flex h-8 items-center gap-2 rounded-full px-2 text-sm font-medium text-foreground transition-colors hover:bg-card/70 focus-visible:outline-2 focus-visible:outline-ring"
+          aria-checked={matrix}
+          onClick={onToggleMatrix}
+          className="flex h-8 items-center gap-2 rounded-full px-2 text-sm font-medium text-foreground transition-colors hover:bg-card focus-visible:outline-2 focus-visible:outline-ring"
         >
-          {stealth ? (
-            <Moon className="size-4" aria-hidden="true" />
-          ) : (
-            <Sun className="size-4" aria-hidden="true" />
-          )}
-          <span className="sr-only lg:not-sr-only lg:whitespace-nowrap">Stealth Mode</span>
+          <Binary className={cn('size-4', matrix && 'text-cyber')} aria-hidden="true" />
+          <span className="sr-only lg:not-sr-only lg:whitespace-nowrap">Matrix Mode</span>
           <span
             aria-hidden="true"
             className={cn(
-              'relative flex h-5 w-9 items-center rounded-full p-0.5 transition-colors',
-              stealth ? 'bg-lavender' : 'bg-foreground/15',
+              'relative flex h-5 w-9 items-center rounded-full p-0.5 ring-1 transition-colors',
+              matrix ? 'bg-cyber/30 ring-cyber/60' : 'bg-foreground/10 ring-foreground/20',
             )}
           >
             <span
               className={cn(
-                'size-4 rounded-full bg-navy shadow-soft transition-transform motion-reduce:transition-none',
-                stealth && 'translate-x-4',
+                'size-4 rounded-full shadow-soft transition-transform motion-reduce:transition-none',
+                matrix ? 'translate-x-4 bg-cyber' : 'bg-muted-foreground',
               )}
             />
           </span>
@@ -62,7 +58,7 @@ export function TopBar({ stealth, onToggleStealth, onLock }: TopBarProps) {
         <button
           type="button"
           onClick={onLock}
-          className="flex h-8 items-center gap-1.5 rounded-full bg-primary px-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="flex h-8 items-center gap-1.5 rounded-full bg-primary px-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Lock className="size-3.5" aria-hidden="true" />
           <span className="sr-only lg:not-sr-only">Lock</span>
@@ -76,13 +72,15 @@ export function ThreatPill({ className }: { className?: string }) {
   return (
     <p
       className={cn(
-        'items-center gap-2 rounded-full bg-mint px-3 py-1 text-xs font-medium text-navy shadow-soft',
+        'bg-brand-gradient items-center gap-2 rounded-full p-px text-xs font-medium shadow-soft',
         className,
       )}
     >
-      <ShieldCheck className="size-3.5" aria-hidden="true" />
-      <span>
-        Threat level: <strong className="font-semibold">LOW</strong> · Candidate is hireable
+      <span className="flex items-center gap-2 rounded-full bg-midnight/85 px-3 py-1 text-foreground">
+        <ShieldCheck className="size-3.5 text-cyber" aria-hidden="true" />
+        <span>
+          Threat level: <strong className="font-semibold text-cyber">LOW</strong> · Candidate is hireable
+        </span>
       </span>
     </p>
   )
